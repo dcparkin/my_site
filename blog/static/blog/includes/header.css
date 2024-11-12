@@ -1,0 +1,12 @@
+a.home {
+    text-align: center;
+}
+
+a.all {
+    float: right;
+}
+
+nav {
+    background-color: rgba(102, 102, 241, 0.922);
+    padding: 4rem;    
+}

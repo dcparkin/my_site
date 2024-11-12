@@ -1,0 +1,15 @@
+ul {
+    list-style: none;
+    text-align: center;
+    justify-items: center;
+    margin: 8rem;
+}    
+
+li { 
+    display: table-cell;
+
+}
+
+div {
+    float: left;
+}
