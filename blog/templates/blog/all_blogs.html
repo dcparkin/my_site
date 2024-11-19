@@ -2,8 +2,8 @@
 {% load static %}
 
 {% block css_files  %}
-    <link rel="stylesheet" href="{% static "blog/includes/header.css" %}">
     <link rel="stylesheet" href="{% static "blog/all_posts.css" %}">
+    <link rel="stylesheet" href="{% static "blog/includes/header.css" %}">
 {% endblock  %}
 
 {% block page_title %} All Posts {% endblock page_title %}
@@ -12,7 +12,12 @@
     {% include "blog/includes/header.html" %}
     <ul> 
         {% for blog_item in all_blogs %}
-            <li> <a href={% url "blog-post" blog_item.title%}>{{ blog_item.title }} </a></li>
+            <a href={% url "blog-post" blog_item.title%}>
+                <li> 
+                    <h1>{{ blog_item.title }} </h1>
+                    <p> {{ blog_item.blog_text | truncatewords:6 }} <p>
+                </li>
+            </a>
         {% endfor %}
     </ul>
 {% endblock content %}

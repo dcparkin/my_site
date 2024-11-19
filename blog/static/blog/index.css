@@ -1,15 +1,30 @@
+h1 {
+    text-align: center;
+}
+
+img {
+    border-radius: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto; 
+    width: 300px;
+}
+
 ul {
     list-style: none;
     text-align: center;
-    justify-items: center;
-    margin: 8rem;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
 }    
 
 li { 
-    display: table-cell;
-
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    border-radius: 10%;
 }
 
-div {
-    float: left;
+li:hover,
+li a:active {
+    background-color: #a16db7;
 }

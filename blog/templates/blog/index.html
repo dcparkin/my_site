@@ -2,8 +2,8 @@
 {% load static %}
 
 {% block css_files  %}
-    <link rel="stylesheet" href="{% static "blog/includes/header.css" %}">
     <link rel="stylesheet" href="{% static "blog/index.css" %}">
+    <link rel="stylesheet" href="{% static "blog/includes/header.css" %}">  
 {% endblock  %}
 
 {% block page_title %} Dan's Blog {% endblock page_title %}
@@ -12,13 +12,16 @@
     {% include "blog/includes/header.html" %}
     <div>
         <h1> Dans Blog </h1>
-        <img src="{% static "blog/welcome.jpg" %}">
+        <img src="{% static "blog/welcome.jpg" %}"> 
     </div>
     <ul> 
         {% for blog_item in first_three %}
-            <li> <h2><a href={% url "blog-post" blog_item.title %}>{{ blog_item.title }} </a></h2>
-                <p>{{ blog_item.blog_text | truncatewords:4 }}</p>
-            </li>
+            <a href={% url "blog-post" blog_item.title %}>
+                <li> 
+                    <h2>{{ blog_item.title }}</h2>
+                    <p>{{ blog_item.blog_text | truncatewords:4 }}</p>
+                </li>
+            </a>
         {% endfor %}
     </ul>
 {% endblock content %}

@@ -8,5 +8,6 @@ a.all {
 
 nav {
     background-color: rgba(102, 102, 241, 0.922);
-    padding: 4rem;    
+    padding: 3rem;  
+    border-radius: 2%;   
 }
