@@ -12,7 +12,7 @@
     {% include "blog/includes/header.html" %}
     <ul> 
         {% for blog_item in all_blogs %}
-            <a href={% url "blog-post" blog_item.title%}>
+            <a href={{ blog_item.get_blog_url }}>
                 <li> 
                     <h1>{{ blog_item.title }} </h1>
                     <p> {{ blog_item.blog_text | truncatewords:6 }} <p>

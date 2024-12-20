@@ -5,10 +5,13 @@
     <link rel="stylesheet" href="{% static "blog/includes/header.css" %}">
 {% endblock  %}
 
-{% block page_title %} {{ name }} {% endblock page_title %}
+{% block page_title %} {{ blogpost.title }} {% endblock page_title %}
 
 {% block content %}
     {% include "blog/includes/header.html" %}
-    <h1> {{ name }} </h1> 
-    <p> {{ blog.blog_text }} </p>
+    <h1> {{ blogpost.conten }} </h1> 
+    <img src="{{ blogpost.image.url }}"/> 
+    <p> {{ blogpost.blog_text }} </p>
+    <small>{{ blogpost.author.first_name }} {{blogpost.author.last_name}} </small>
+    <p><small>{{ blogpost.date}} </small></p>
 {% endblock content %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_files  %}
+    <link rel="stylesheet" href="{% static "blog/includes/header.css" %}">
+{% endblock  %}
+
+{% block page_title %} Create Blog Post {% endblock page_title %}
+
+{% block content %}
+    {% include "blog/includes/header.html" %}
+    <h1>Create New Blog Post</h1>
+    <form action="create-new" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-control" {% if field.errors %}errors{% endif %}> 
+                {{ field.label_tag }}
+                {{ field }}
+                {{ field.errors }}
+            </div>
+        {% endfor %}
+        <button type="submit">Save</button> 
+    </form>
+{% endblock content %}

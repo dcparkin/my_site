@@ -1,39 +1,44 @@
-from django.shortcuts import render
+from typing import Any
+from django.shortcuts import render, get_object_or_404
+from django.core.files import File
+from django.views.generic import DetailView, ListView
+from django.views.generic.base import TemplateView
+from django.views.generic.edit import CreateView
 from enum import Enum
-from django.http import Http404
+from django.http import HttpResponseRedirect
 
-class BlogPost():
-    def __init__(self, title=None, blog_text=None, image=None) -> None:
-        self.image = image
-        self.title = title
-        self.blog_text = blog_text
+from .models import BlogPost, Author
+from .forms import BlogPostForm
     
-blogs = [
-    BlogPost("Blog1", "This is Blog 1 and here is all the text"),
-    BlogPost("Blog2", "This is Blog 2 and here is all the text"),
-    BlogPost("Blog3", "This is Blog 3 and here is all the text"),
-    BlogPost("Blog4", "This is Blog 4 and here is all the text")
-]
+
 
 # Create your views here.
 
 # welcome page with 3 blog posts
-def blog_index(request):
-    
-    content = {
-        'first_three': blogs[:3],
-    }
-    return render(request, "blog/index.html", content) 
+class IndexView(TemplateView):
+    template_name = "blog/index.html"
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['first_three'] = BlogPost.objects.all().order_by("-date")[:3]
+        return context
 
 # list of all blog posts (/blog/posts)
-def all_blog_posts(request):
-    return render(request, "blog/all_blogs.html", {'all_blogs': blogs})
+class AllPostsView(ListView):
+    template_name = "blog/all_blogs.html"
+    model = BlogPost
+    ordering = ['-date']
+    context_object_name = 'all_blogs'
 
 # view specific blog post (/blog/posts/blog_name)
-def specific_blog_post(request, blog_name):
-    try:
-        blog = [b for b in blogs if b.title == blog_name][0]
-        return render(request, "blog/show_blog.html", {'name' : blog_name, 
-                                                   'blog': blog})
-    except:
-        raise Http404()
+class ViewPostView(DetailView):
+    template_name = "blog/show_blog.html"
+    model = BlogPost
+
+
+class CreatePostView(CreateView):
+    model = BlogPost
+    form_class = BlogPostForm
+    template_name = "blog/create_blog.html"
+    success_url = "/"
+
