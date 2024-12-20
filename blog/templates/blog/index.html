@@ -16,7 +16,7 @@
     </div>
     <ul> 
         {% for blog_item in first_three %}
-            <a href={% url "blog-post" blog_item.title %}>
+            <a href={{ blog_item.get_blog_url }}>
                 <li> 
                     <h2>{{ blog_item.title }}</h2>
                     <p>{{ blog_item.blog_text | truncatewords:4 }}</p>
